@@ -1,0 +1,16 @@
+version: '3.4'
+
+name: lafs-stack
+services:
+  learnangularfromscratch:
+    image: learnangularfromscratch
+    build:
+      context: .
+      dockerfile: ./Dockerfile
+    environment:
+      NODE_ENV: development
+    ports:
+      - 3000:3000
+      - 4200:4200
+      - 9229:9229
+    command: ["node", "--inspect=0.0.0.0:9229", "index.js"]

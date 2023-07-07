@@ -1,0 +1,17 @@
+version: '3.4'
+
+name: lafs-app
+services:
+  web:
+    image: lafs-web
+    build:
+      context: .
+      dockerfile: ./Dockerfile
+    environment:
+      NODE_ENV: production
+    ports:
+      - 8000-8199:4200
+    deploy:
+      mode: replicated
+      replicas: 4
+      endpoint_mode: vip
