@@ -1,17 +1,25 @@
-version: '3.4'
+version: '3.7'
 
-name: lafs-app
+name: lafs-web-stack
+
 services:
   web:
-    image: lafs-web
+    container_name: lafs-web
+    image: lafs-web:latest
+    restart: always
     build:
       context: .
       dockerfile: ./Dockerfile
     environment:
-      NODE_ENV: production
+      API_HOST: "http://127.0.0.1"
+      API_PORT: 3000
+      API_USER: ""
+      API_PASSWORD: ""
+      API_PATH: "/api"
     ports:
-      - 8000-8199:4200
-    deploy:
-      mode: replicated
-      replicas: 4
-      endpoint_mode: vip
+      - 4200:4200
+
+networks:
+  default:
+    external:
+      name: lafs-net
